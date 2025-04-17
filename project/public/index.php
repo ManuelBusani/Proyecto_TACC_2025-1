@@ -1,7 +1,8 @@
 <!-- formulario de login -->
 <!-- mostramos formulario simple con campos para email y constraseña -->
- <!-- si tenemos un error guardado en $_SESSION['error'] lo mostramos -->
+<!-- si tenemos un error guardado en $_SESSION['error'] lo mostramos -->
 <!-- envíamos el formulario por POST a ../actions/login.php, donde procesaremos la autenticación -->
+<!-- index.php -->
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="es">
