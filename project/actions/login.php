@@ -8,6 +8,8 @@
 <?php
 session_start();
 require_once "../config/db.php";
+include "./create_user.php";
+echo ini_get('session.save_path');
 
 // Verificamos que el formulario se haya enviado por POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){

@@ -1,14 +1,15 @@
 <!-- panel al iniciar sesión -->
- <?php
- session_start();
 
- // Redirigiremos si el usuario no ha iniciado sesion
- if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php");
-    exit;
- }
- ?>
- <!DOCTYPE html>
+<?php
+  session_start();
+  var_dump($_SESSION);
+  // Redirigiremos si el usuario no ha iniciado sesion
+//   if (!isset($_SESSION['user_id'])) {
+//     header("Location: index.php");
+//     exit;
+// }
+?>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">

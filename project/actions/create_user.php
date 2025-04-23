@@ -7,8 +7,8 @@ $email = "usuario@correo.com";
 $password = "123456";  // Contraseña en texto plano
 $first_name = "Carlos";
 $last_name = "Mancillas";
-$is_admin = false;
-$is_verified = true;
+$is_admin = 0;
+$is_verified = 1;
 
 // Generar el hash seguro de la contraseña
 $hashed_password = password_hash($password, PASSWORD_BCRYPT);
