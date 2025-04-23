@@ -8,8 +8,6 @@
 <?php
 session_start();
 require_once "../config/db.php";
-include "./create_user.php";
-echo ini_get('session.save_path');
 
 // Verificamos que el formulario se haya enviado por POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -33,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         } 
 
         // Guardamos los datos mínimos en la sesión
+        var_dump($user);
+
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['is_admin'] = $user['is_admin'];
         $_SESSION['first_name'] = $user['first_name'];
