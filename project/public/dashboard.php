@@ -1,4 +1,5 @@
 <!-- panel al iniciar sesión -->
+
 <?php
   session_start();
   // Redirigiremos si el usuario no ha iniciado sesion
