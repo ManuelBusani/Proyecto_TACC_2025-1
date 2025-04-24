@@ -60,7 +60,7 @@
         }
     </style>
 </head>
-<body>
+<body>  
     <div class="login-container">
         <h2>Iniciar sesión</h2>
 
@@ -78,6 +78,10 @@
         <button type="submit">Entrar</button>
         </form>
 
+        <div class="register-link">
+            <p>¿No tienes una cuenta? <a href="register.php">Regístrate aquí</a></p>
+
+        </div>
      </div>
 </body>
 </html>
