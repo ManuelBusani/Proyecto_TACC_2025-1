@@ -24,15 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     if ($user && password_verify($password, $user['password'])) {
 
         // (esto es opcional) verificamos si la cuenta ha sido activada
-        if (!$user['is_verified']) {
-            $_SESSION['error'] = "Tu cuenta no ha sido verificada aún.";
-            header("Location: ../public/index.php");
-            exit;
-        } 
+        // if (!$user['is_verified']) {
+        //     $_SESSION['error'] = "Tu cuenta no ha sido verificada aún.";
+        //     header("Location: ../public/index.php");
+        //     exit;
+        // } 
 
         // Guardamos los datos mínimos en la sesión
-        var_dump($user);
-
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['is_admin'] = $user['is_admin'];
         $_SESSION['first_name'] = $user['first_name'];

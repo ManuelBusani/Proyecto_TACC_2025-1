@@ -1,6 +1,6 @@
 <!-- formulario de login -->
 <!-- mostramos formulario simple con campos para email y constraseña -->
- <!-- si tenemos un error guardado en $_SESSION['error'] lo mostramos -->
+<!-- si tenemos un error guardado en $_SESSION['error'] lo mostramos -->
 <!-- envíamos el formulario por POST a ../actions/login.php, donde procesaremos la autenticación -->
 <?php session_start(); ?>
 <!DOCTYPE html>
@@ -59,8 +59,39 @@
         text-align: center;
         }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        function handleCredentialResponse(response) {
+            fetch('../actions/google_login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ credential: response.credential })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '../public/dashboard.php';
+                } else {
+                    alert('Fallo en el login');
+                }
+            });
+        }
+
+        window.onload = function () {
+        google.accounts.id.initialize({
+            client_id: '964633068946-rer6fh6j09259582nd89ci582ngnjp7i.apps.googleusercontent.com',
+            callback: handleCredentialResponse
+        });
+
+        google.accounts.id.renderButton(
+            document.getElementById("g_id_signin"),
+            { theme: "outline", size: "large" }
+        );
+      };
+    </script>
+
 </head>
-<body>  
+<body>
     <div class="login-container">
         <h2>Iniciar sesión</h2>
 
@@ -80,8 +111,9 @@
 
         <div class="register-link">
             <p>¿No tienes una cuenta? <a href="register.php">Regístrate aquí</a></p>
-
         </div>
+
+        <div id="g_id_signin"></div>
      </div>
 </body>
 </html>
