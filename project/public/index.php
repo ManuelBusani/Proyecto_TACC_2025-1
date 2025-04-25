@@ -60,6 +60,57 @@
         text-align: center;
         }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        function handleCredentialResponse(response) {
+            // fetch('../actions/google_login.php', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ credential: response.credential })
+            // })
+            // .then(res => res.json())
+            // .then(data => {
+            //     if (data.success) {
+            //         window.location.href = '../public/dashboard.php';
+            //     } else {
+            //         alert('Fallo en el login');
+            //     }
+            // });
+            fetch('../actions/google_login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ credential: response.credential })
+            })
+            .then(res => res.text())
+            .then(text => {
+                console.log("Respuesta cruda del servidor:", text);
+                try {
+                    const data = JSON.parse(text);
+                    if (data.success) {
+                        window.location.href = '../public/dashboard.php';
+                    } else {
+                        alert('Fallo en el login');
+                    }
+                } catch (e) {
+                    console.error("Error al parsear JSON:", e);
+                }
+            });
+
+        }
+
+        window.onload = function () {
+        google.accounts.id.initialize({
+            client_id: '964633068946-rer6fh6j09259582nd89ci582ngnjp7i.apps.googleusercontent.com',
+            callback: handleCredentialResponse
+        });
+
+        google.accounts.id.renderButton(
+            document.getElementById("g_id_signin"),
+            { theme: "outline", size: "large" }
+        );
+      };
+    </script>
+
 </head>
 <body>
     <div class="login-container">
@@ -79,6 +130,11 @@
         <button type="submit">Entrar</button>
         </form>
 
+        <div class="register-link">
+            <p>¿No tienes una cuenta? <a href="register.php">Regístrate aquí</a></p>
+        </div>
+
+        <div id="g_id_signin"></div>
      </div>
 </body>
 </html>
