@@ -1,7 +1,13 @@
-<!-- Procesa el token para acceder con google -->
 <?php
+// Procesa el token para acceder con google
+// ob_start();
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
 session_start();
-require_once 'vendor/autoload.php';
+
+require_once '../../vendor/autoload.php';
 require_once '../config/db.php';
 
 header('Content-Type: application/json');
@@ -12,6 +18,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 $token = $data['credential'] ?? null;
 
 if (!$token) {
+    ob_clean();
     echo json_encode(['success' => false, 'message' => 'No token provided']);
     exit;
 }
@@ -19,6 +26,7 @@ if (!$token) {
 $client = new Google_Client(['client_id' => '964633068946-rer6fh6j09259582nd89ci582ngnjp7i.apps.googleusercontent.com']);
 $payload = $client->verifyIdToken($token);
 
+// error_log(print_r($payload, true));
 if ($payload) {
     $email = $payload['email'];
     $google_id = $payload['sub'];
@@ -47,7 +55,7 @@ if ($payload) {
     } else {
         if(!$user['google_id']){
             $stmt = $pdo->prepare("UPDATE users SET google_id = :google_id WHERE id = :id");
-            $stmt->execute(['google_id' => $google_id, 'id' => $user['id']]);
+              $stmt->execute(['google_id' => $google_id, 'id' => $user['id']]);
         }
 
         $_SESSION['user_id']= $user['id'];
@@ -55,7 +63,10 @@ if ($payload) {
         $_SESSION['first_name'] = $user['first_name'];
     }
 
+    ob_clean();
     echo json_encode(['success' => true]);
+
 } else {
+    ob_clean();
     echo json_encode(['success' => false, 'message' => 'Invalid token']);
 }

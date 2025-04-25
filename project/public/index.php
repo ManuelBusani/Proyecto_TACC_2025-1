@@ -62,19 +62,39 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
         function handleCredentialResponse(response) {
+            // fetch('../actions/google_login.php', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ credential: response.credential })
+            // })
+            // .then(res => res.json())
+            // .then(data => {
+            //     if (data.success) {
+            //         window.location.href = '../public/dashboard.php';
+            //     } else {
+            //         alert('Fallo en el login');
+            //     }
+            // });
             fetch('../actions/google_login.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ credential: response.credential })
             })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.href = '../public/dashboard.php';
-                } else {
-                    alert('Fallo en el login');
+            .then(res => res.text())
+            .then(text => {
+                console.log("Respuesta cruda del servidor:", text);
+                try {
+                    const data = JSON.parse(text);
+                    if (data.success) {
+                        window.location.href = '../public/dashboard.php';
+                    } else {
+                        alert('Fallo en el login');
+                    }
+                } catch (e) {
+                    console.error("Error al parsear JSON:", e);
                 }
             });
+
         }
 
         window.onload = function () {
