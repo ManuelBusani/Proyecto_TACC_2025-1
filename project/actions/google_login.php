@@ -1,9 +1,5 @@
 <?php
 // Procesa el token para acceder con google
-// ob_start();
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
 
 session_start();
 
@@ -12,21 +8,22 @@ require_once '../config/db.php';
 
 header('Content-Type: application/json');
 
-
 $data = json_decode(file_get_contents('php://input'), true);
 
 $token = $data['credential'] ?? null;
 
+// checar si se envió un token
 if (!$token) {
     ob_clean();
-    echo json_encode(['success' => false, 'message' => 'No token provided']);
+    echo json_encode(['success' => false, 'message' => 'No se proporcionó un token']);
     exit;
 }
+
 
 $client = new Google_Client(['client_id' => '964633068946-rer6fh6j09259582nd89ci582ngnjp7i.apps.googleusercontent.com']);
 $payload = $client->verifyIdToken($token);
 
-// error_log(print_r($payload, true));
+# Checar si el token es válido
 if ($payload) {
     $email = $payload['email'];
     $google_id = $payload['sub'];
@@ -41,22 +38,26 @@ if ($payload) {
         $first_name = $payload['given_name'];
         $last_name = $payload['family_name'];
 
-        $stmt = $pdo->prepare("INSERT INTO users (email, google_id, first_name, last_name) 
-                               VALUES (:email, :google_id, :first_name, :last_name)");
+        $stmt = $pdo->prepare("INSERT INTO users (email, google_id, first_name, last_name, is_verified) 
+                               VALUES (:email, :google_id, :first_name, :last_name, :is_verified)");
         $stmt->execute([
             'email' => $email,
             'google_id' => $google_id,
             'first_name' => $first_name,
-            'last_name' => $last_name]);
+            'last_name' => $last_name,
+            'is_verified' => 1]);
 
         $_SESSION['user_id'] = $pdo->lastInsertId();
         $_SESSION['is_admin'] = 0;
         $_SESSION['first_name'] = $first_name;
     } else {
+        // Actualizar el google id si el usuario existe pero no tiene google_id,
+        // esto sucede cuando un usuario se registró manualmente antes.
         if(!$user['google_id']){
             $stmt = $pdo->prepare("UPDATE users SET google_id = :google_id WHERE id = :id");
-              $stmt->execute(['google_id' => $google_id, 'id' => $user['id']]);
+            $stmt->execute(['google_id' => $google_id, 'id' => $user['id']]);
         }
+
 
         $_SESSION['user_id']= $user['id'];
         $_SESSION['is_admin'] = $user['is_admin'];
@@ -68,5 +69,5 @@ if ($payload) {
 
 } else {
     ob_clean();
-    echo json_encode(['success' => false, 'message' => 'Invalid token']);
+    echo json_encode(['success' => false, 'message' => 'El token proporcionado no es válido']);
 }

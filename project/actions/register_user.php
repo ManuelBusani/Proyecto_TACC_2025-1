@@ -36,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             'last_name' => $last_name,
             'email' => $email,
             'password' => $hashed_password,
-            'is_admin' => false, // no es admin por defecto
-            'is_verified' => true // esto por si decidimos implementar la verificacion por correo la cambiamos a false
+            'is_admin' => 0, // no es admin por defecto
+            'is_verified' => 1 // esto por si decidimos implementar la verificacion por correo la cambiamos a false
         ]);
     
         $_SESSION['success'] = "Registro exitoso. Ahora puedes iniciar sesión.";

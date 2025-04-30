@@ -59,23 +59,17 @@
         color: red;
         text-align: center;
         }
+
+        #googleAuth {
+            max-width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
     </style>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
         function handleCredentialResponse(response) {
-            // fetch('../actions/google_login.php', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({ credential: response.credential })
-            // })
-            // .then(res => res.json())
-            // .then(data => {
-            //     if (data.success) {
-            //         window.location.href = '../public/dashboard.php';
-            //     } else {
-            //         alert('Fallo en el login');
-            //     }
-            // });
             fetch('../actions/google_login.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -105,8 +99,8 @@
         });
 
         google.accounts.id.renderButton(
-            document.getElementById("g_id_signin"),
-            { theme: "outline", size: "large" }
+            document.getElementById("googleAuth"),  
+            { theme: "outline", size: "large",  }
         );
       };
     </script>
@@ -134,7 +128,7 @@
             <p>¿No tienes una cuenta? <a href="register.php">Regístrate aquí</a></p>
         </div>
 
-        <div id="g_id_signin"></div>
+        <div id="googleAuth"></div>
      </div>
 </body>
 </html>
