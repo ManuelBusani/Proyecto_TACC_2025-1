@@ -46,7 +46,7 @@
     <h2>Bienvenido, <?= htmlspecialchars($_SESSION['first_name']) ?> 👋</h2>
     <p>Has iniciado sesión correctamente.</p>
     
-    <a href="logout.php" class="logout-btn">Cerrar sesión</a>
+    <a href="../actions/logout.php" class="logout-btn">Cerrar sesión</a>
   </div>
 </body>
 </html>
