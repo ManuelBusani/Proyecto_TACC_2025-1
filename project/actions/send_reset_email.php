@@ -24,7 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // enviamos el correo con el enlace de recuperacion
         $reset_link = "http://148.225.83.8/~cursotacc/a220221313/proyecto_final/proyecto_final/Proyecto_TACC_2025-1/project/public/reset_password.php?token=$token";
-        
+
+        // falta checar        
         // usamos PHPMailer para enviar el correo
         $mail = new PHPMailer\PHPMailer\PHPMailer();
         $mail->setFrom('no-reply@tusitio.com', 'Sistema de Recuperación');

@@ -3,7 +3,7 @@
 
 session_start();
 
-require_once '../../vendor/autoload.php';
+require_once '../vendor/autoload.php';
 require_once '../config/db.php';
 
 header('Content-Type: application/json');
