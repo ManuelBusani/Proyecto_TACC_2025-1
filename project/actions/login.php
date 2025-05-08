@@ -1,12 +1,13 @@
-<!-- procesa el formulario login -->
-<!-- procesa el formulario login -->
-<!--Este script: Recibe el correo y la contraseña.
-                 Consulta la base de datos. 
-                 Verifica que el usuario exista y la contraseña coincida.
-                 Crea la sesión si todo es correcto.
-                 Redirige el dashboard o al login con error.-->
-
 <?php
+// procesa el formulario login -->
+// procesa el formulario login -->
+// Este script: Recibe el correo y la contraseña.
+//              Consulta la base de datos.
+//              Verifica que el usuario exista y la contraseña coincida.
+//              Crea la sesión si todo es correcto.
+//              Redirige el dashboard o al login con error.
+
+
 session_start();
 require_once "../config/db.php";
 

@@ -5,6 +5,8 @@ session_start();
 
 require_once '../vendor/autoload.php';
 require_once '../config/db.php';
+use GuzzleHttp\Client;
+use Google_Client;
 
 header('Content-Type: application/json');
 
@@ -19,11 +21,16 @@ if (!$token) {
     exit;
 }
 
-
 $client = new Google_Client(['client_id' => '964633068946-rer6fh6j09259582nd89ci582ngnjp7i.apps.googleusercontent.com']);
-$payload = $client->verifyIdToken($token);
 
-# Checar si el token es válido
+$httpClient = new Client([
+    'verify' => __DIR__ . '/../certs/cacert.pem'
+]);
+
+$client->setHttpClient($httpClient);
+
+$payload = $client->verifyIdToken($token);
+// Checar si el token es válido
 if ($payload) {
     $email = $payload['email'];
     $google_id = $payload['sub'];
