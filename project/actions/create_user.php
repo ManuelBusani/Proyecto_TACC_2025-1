@@ -7,15 +7,15 @@ $email = "usuario@correo.com";
 $password = "123456";  // Contraseña en texto plano
 $first_name = "Carlos";
 $last_name = "Mancillas";
-$is_admin = 0;
-$is_verified = 1;
+// $is_admin = 0;
+// $is_verified = 1;
 
 // Generar el hash seguro de la contraseña
 $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
 // Insertar el usuario en la base de datos
-$stmt = $pdo->prepare("INSERT INTO users (email, password, first_name, last_name, is_admin, is_verified) 
-                       VALUES (:email, :password, :first_name, :last_name, :is_admin, :is_verified)");
+$stmt = $pdo->prepare("INSERT INTO users (email, password, first_name, last_name) 
+                       VALUES (:email, :password, :first_name, :last_name)");
 
 try {
     $stmt->execute([
@@ -23,8 +23,8 @@ try {
         'password' => $hashed_password,
         'first_name' => $first_name,
         'last_name' => $last_name,
-        'is_admin' => $is_admin,
-        'is_verified' => $is_verified
+        // 'is_admin' => $is_admin,
+        // 'is_verified' => $is_verified
     ]);
 
     echo "✅ Usuario de prueba insertado con éxito.";

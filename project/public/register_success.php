@@ -56,4 +56,4 @@ if (!isset($_SESSION['success'])) {
         <a href="index.php" class="login-btn">Ir a Iniciar Sesión</a>
     </div>
 </body>
-</html
+</html>

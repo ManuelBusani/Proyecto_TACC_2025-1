@@ -1,4 +1,5 @@
 <!-- procesa el formulario login -->
+<!-- procesa el formulario login -->
 <!--Este script: Recibe el correo y la contraseña.
                  Consulta la base de datos. 
                  Verifica que el usuario exista y la contraseña coincida.
@@ -8,8 +9,6 @@
 <?php
 session_start();
 require_once "../config/db.php";
-include "./create_user.php";
-echo ini_get('session.save_path');
 
 // Verificamos que el formulario se haya enviado por POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -26,11 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     if ($user && password_verify($password, $user['password'])) {
 
         // (esto es opcional) verificamos si la cuenta ha sido activada
-        if (!$user['is_verified']) {
-            $_SESSION['error'] = "Tu cuenta no ha sido verificada aún.";
-            header("Location: ../public/index.php");
-            exit;
-        } 
+        // if (!$user['is_verified']) {
+        //     $_SESSION['error'] = "Tu cuenta no ha sido verificada aún.";
+        //     header("Location: ../public/index.php");
+        //     exit;
+        // } 
 
         // Guardamos los datos mínimos en la sesión
         $_SESSION['user_id'] = $user['id'];
