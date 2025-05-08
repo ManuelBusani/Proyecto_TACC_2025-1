@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $password = $_POST['password'];
 
     // Consultamos el usuario en la base de datos
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+    $stmt = $pdo->prepare("SELECT * FROM equipoPi_users WHERE email = :email LIMIT 1");
     $stmt->execute(['email' => $email]);
     $user = $stmt->fetch();
 

@@ -11,7 +11,7 @@
         $password = $_POST['password'];
 
         // verificamos si el correo ya esta registrado en la base de datos
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+        $stmt = $pdo->prepare("SELECT * FROM equipoPi_users WHERE email = :email LIMIT 1");
         $stmt->execute(['email' => $email]);
         $existing_user = $stmt->fetch();
 
@@ -26,7 +26,7 @@
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
         // insertamos el nuevo usuario en la base de datos
-        $stmt = $pdo->prepare("INSERT INTO users (first_name, last_name, email, password, is_admin, is_verified) 
+        $stmt = $pdo->prepare("INSERT INTO equipoPi_users (first_name, last_name, email, password, is_admin, is_verified) 
                             VALUES (:first_name, :last_name, :email, :password, :is_admin, :is_verified)");
 
 

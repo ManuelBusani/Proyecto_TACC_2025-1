@@ -8,7 +8,7 @@
     $token = $_GET['token'];
 
     // buscamos el token en la base de datos
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE reset_token = :token LIMIT 1");
+    $stmt = $pdo->prepare("SELECT * FROM equipoPi_users WHERE reset_token = :token LIMIT 1");
     $stmt->execute(['token' => $token]);
     $user = $stmt->fetch();
 

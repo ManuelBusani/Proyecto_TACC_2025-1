@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = strtolower(trim($_POST['email']));
 
     // verificamos si el correo esta registrado
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+    $stmt = $pdo->prepare("SELECT * FROM equipoPi_users WHERE email = :email LIMIT 1");
     $stmt->execute(['email' => $email]);
     $user = $stmt->fetch();
 
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $token = bin2hex(random_bytes(16)); // 32 caracteres
 
         // guardamos el token en la base de datos
-        $stmt = $pdo->prepare("UPDATE users SET reset_token = :token WHERE email = :email");
+        $stmt = $pdo->prepare("UPDATE equipoPi_users SET reset_token = :token WHERE email = :email");
         $stmt->execute(['token' => $token, 'email' => $email]);
 
         // enviamos el correo con el enlace de recuperacion

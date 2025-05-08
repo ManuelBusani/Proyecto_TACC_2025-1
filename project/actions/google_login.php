@@ -28,7 +28,7 @@ if ($payload) {
     $email = $payload['email'];
     $google_id = $payload['sub'];
 
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE google_id = :google_id OR email = :email LIMIT 1");
+    $stmt = $pdo->prepare("SELECT * FROM equipoPi_users WHERE google_id = :google_id OR email = :email LIMIT 1");
     $stmt->execute(['google_id' => $google_id, 'email' => $email]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -38,7 +38,7 @@ if ($payload) {
         $first_name = $payload['given_name'];
         $last_name = $payload['family_name'];
 
-        $stmt = $pdo->prepare("INSERT INTO users (email, google_id, first_name, last_name, is_verified) 
+        $stmt = $pdo->prepare("INSERT INTO equipoPi_users (email, google_id, first_name, last_name, is_verified) 
                                VALUES (:email, :google_id, :first_name, :last_name, :is_verified)");
         $stmt->execute([
             'email' => $email,
@@ -54,7 +54,7 @@ if ($payload) {
         // Actualizar el google id si el usuario existe pero no tiene google_id,
         // esto sucede cuando un usuario se registró manualmente antes.
         if(!$user['google_id']){
-            $stmt = $pdo->prepare("UPDATE users SET google_id = :google_id WHERE id = :id");
+            $stmt = $pdo->prepare("UPDATE equipoPi_users SET google_id = :google_id WHERE id = :id");
             $stmt->execute(['google_id' => $google_id, 'id' => $user['id']]);
         }
 

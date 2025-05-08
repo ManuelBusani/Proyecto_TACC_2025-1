@@ -9,7 +9,7 @@
     $password = $_POST['password'];
 
     // verificamos si el token es valido
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE reset_token = :token LIMIT 1");
+    $stmt = $pdo->prepare("SELECT * FROM equipoPi_users WHERE reset_token = :token LIMIT 1");
     $stmt->execute(['token' => $token]);
     $user = $stmt->fetch();
 

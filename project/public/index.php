@@ -126,6 +126,7 @@
 
         <div class="register-link">
             <p>¿No tienes una cuenta? <a href="register.php">Regístrate aquí</a></p>
+            <p><a href="forgot_password.php">¿Olvidaste tu contraseña?</a></p>
         </div>
 
         <div id="googleAuth"></div>

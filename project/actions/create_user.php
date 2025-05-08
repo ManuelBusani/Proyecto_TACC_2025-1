@@ -14,7 +14,7 @@ $last_name = "Mancillas";
 $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
 // Insertar el usuario en la base de datos
-$stmt = $pdo->prepare("INSERT INTO users (email, password, first_name, last_name) 
+$stmt = $pdo->prepare("INSERT INTO equipoPi_users (email, password, first_name, last_name) 
                        VALUES (:email, :password, :first_name, :last_name)");
 
 try {
