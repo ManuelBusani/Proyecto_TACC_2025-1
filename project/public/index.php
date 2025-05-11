@@ -161,7 +161,50 @@
         footer p {
             margin: 0;
         }
+
+        #googleAuth {
+            max-width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        function handleCredentialResponse(response) {
+            fetch('../actions/google_login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ credential: response.credential })
+            })
+            .then(res => res.text())
+            .then(text => {
+                console.log("Respuesta cruda del servidor:", text);
+                try {
+                    const data = JSON.parse(text);
+                    if (data.success) {
+                        window.location.href = '../public/dashboard.php';
+                    } else {
+                        alert('Fallo en el login');
+                    }
+                } catch (e) {
+                    console.error("Error al parsear JSON:", e);
+                }
+            });
+
+        }
+
+        window.onload = function () {
+        google.accounts.id.initialize({
+            client_id: '964633068946-rer6fh6j09259582nd89ci582ngnjp7i.apps.googleusercontent.com',
+            callback: handleCredentialResponse
+        });
+
+        google.accounts.id.renderButton(
+            document.getElementById("googleAuth"),  
+            { theme: "outline", size: "large",  }
+        );
+      };
+    </script>
 </head>
 <body>
 
@@ -241,6 +284,8 @@
                 <div class="forgot-password">
                     <p><a href="forgot_password.php">¿Olvidaste tu contraseña?</a></p>
                 </div>
+
+                <div id="googleAuth"></div>
             </div>
 
         <?php else: ?>

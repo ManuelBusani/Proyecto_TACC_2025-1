@@ -2,14 +2,13 @@
 
 Proyecto para Tópicos Avanzados de Ciencias de la Computación.
 
-### un titulo
+### Instalación de dependencias
 
-Se necesita instalar composer en la raíz del proyecto.
+1. Instala composer:
 
 [https://getcomposer.org/download/](https://getcomposer.org/download/)
 
-Luego en la raíz del proyecto:
+2. Instala dependencias con composer en el directorio `project`:
 ```
-composer require google/apiclient
+php composer.phar install
 ```
-> A lo mejor no necesario y se puede hacer de otra manera con el `composer.json` pero no sé.
