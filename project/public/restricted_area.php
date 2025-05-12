@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 // Verificamos si el producto fue marcado como vendido
 if (isset($_POST['mark_sold'])) {
     $product_id = $_POST['product_id'];
-    $stmt = $pdo->prepare("UPDATE products SET status = 'sold' WHERE id = :product_id");
+    $stmt = $pdo->prepare("UPDATE equipoPi_products SET status = 'sold' WHERE id = :product_id");
     $stmt->execute(['product_id' => $product_id]);
 }
 
@@ -44,7 +44,7 @@ $stmt->execute($params);
 $products = $stmt->fetchAll();
 
 // Notificaciones de productos cercanos a la caducidad o con bajo stock
-$alert_query = "SELECT * FROM products WHERE expiration_date <= CURDATE() + INTERVAL 7 DAY OR stock <= 10";
+$alert_query = "SELECT * FROM equipoPi_products WHERE expiration_date <= CURDATE() + INTERVAL 7 DAY OR stock <= 10";
 $stmt = $pdo->prepare($alert_query);
 $stmt->execute();
 $alerts = $stmt->fetchAll();

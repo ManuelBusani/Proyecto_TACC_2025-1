@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['is_admin'] != 1) {
 }
 
 // Consulta para generar el reporte de productos cercanos a la fecha de caducidad o con bajo stock (stock <= 20)
-$stmt = $pdo->prepare("SELECT * FROM products WHERE expiration_date <= CURDATE() + INTERVAL 7 DAY OR stock <= 20 ORDER BY expiration_date");
+$stmt = $pdo->prepare("SELECT * FROM equipoPi_products WHERE expiration_date <= CURDATE() + INTERVAL 7 DAY OR stock <= 20 ORDER BY expiration_date");
 $stmt->execute();
 $products = $stmt->fetchAll();
 ?>

@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product_id = $_POST['product_id'];
 
     // Eliminar el producto de la base de datos
-    $stmt = $pdo->prepare("DELETE FROM products WHERE id = :product_id");
+    $stmt = $pdo->prepare("DELETE FROM equipoPi_products WHERE id = :product_id");
     $stmt->execute(['product_id' => $product_id]);
 
     $_SESSION['success'] = "Producto eliminado exitosamente.";
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Obtener los productos para mostrar en la tabla de eliminación
-$stmt = $pdo->prepare("SELECT * FROM products");
+$stmt = $pdo->prepare("SELECT * FROM equipoPi_products");
 $stmt->execute();
 $products = $stmt->fetchAll();
 ?>

@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['is_admin'] != 1) {
 }
 
 // Obtener todos los productos de la base de datos
-$stmt = $pdo->prepare("SELECT * FROM products");
+$stmt = $pdo->prepare("SELECT * FROM equipoPi_products");
 $stmt->execute();
 $products = $stmt->fetchAll();
 ?>

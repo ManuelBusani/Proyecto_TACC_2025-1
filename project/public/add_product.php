@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $expiration_date = $_POST['expiration_date'];
 
     // Insertar el nuevo producto en la base de datos
-    $stmt = $pdo->prepare("INSERT INTO products (name, price, stock, expiration_date, status) VALUES (:name, :price, :stock, :expiration_date, 'available')");
+    $stmt = $pdo->prepare("INSERT INTO equipoPi_products (name, price, stock, expiration_date, status) VALUES (:name, :price, :stock, :expiration_date, 'available')");
     $stmt->execute([
         'name' => $name,
         'price' => $price,
