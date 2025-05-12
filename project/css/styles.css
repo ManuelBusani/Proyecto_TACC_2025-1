@@ -208,10 +208,69 @@ form button:hover {
 .google-login-btn:hover {
     background-color: #c1351d;
 }
-</style>
-</head>
-<body>
 
-</body>
-</html>
+/* Estilo para la tabla */
+table {
+    width: 100%; /* Que ocupe todo el ancho disponible */
+    border-collapse: collapse; /* Eliminar el espacio entre celdas */
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px; /* Espacio dentro de las celdas */
+    text-align: left; /* Alineación de texto a la izquierda */
+    border-bottom: 1px solid #ddd; /* Línea delgada debajo de cada fila */
+}
+
+th {
+    background-color: #4CAF50; /* Fondo verde para los encabezados */
+    color: white; /* Texto blanco */
+    font-weight: bold; /* Hacer el texto en los encabezados más fuerte */
+}
+
+td {
+    background-color: #f9f9f9; /* Fondo claro para las celdas */
+}
+
+/* Estilo para las filas alternadas (mejorar la legibilidad) */
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Fondo gris claro en las filas pares */
+}
+
+tr:hover {
+    background-color: #f1f1f1; /* Fondo más oscuro cuando se pasa el cursor por encima */
+}
+
+/* Botones para descargar */
+.download-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.download-btn:hover {
+    background-color: #45a049;
+}
+
+
+.alerts {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.alerts ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.alerts li {
+    margin-bottom: 10px;
+}
 
