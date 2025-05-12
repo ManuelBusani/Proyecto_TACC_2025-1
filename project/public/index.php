@@ -217,6 +217,14 @@
                 <li><a href="about.php">Sobre Nosotros</a></li>
                 <li><a href="contact.php">Contacto</a></li>
                 <li><a href="products.php">Productos</a></li>
+                <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+                        <li><a href="restricted_area.php">Zona Restringida</a></li>
+                        <li><a href="admin_panel.php">Panel de Administración</a></li>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] != 1): ?>
+                        <li><a href="restricted_area.php">Zona Restringida</a></li>
+                <?php endif; ?>
+                <li><a href="../actions/logout.php">Cerrar sesión</a></li>
             </ul>
         </nav>
     </header>
@@ -294,7 +302,7 @@
                 <!-- Si el usuario es administrador -->
                 <h2>Bienvenido, Administrador</h2>
                 <p>En el panel de administración, puedes gestionar los productos y consultar reportes.</p>
-                <a href="admin_dashboard.php">Ir al Panel de Administración</a>
+                <a href="admin_panel.php">Ir al Panel de Administración</a>
             <?php else: ?>
                 <!-- Si el usuario es restringido -->
                 <h2>Bienvenido, <?= htmlspecialchars($_SESSION['first_name']); ?></h2>
