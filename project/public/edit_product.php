@@ -13,7 +13,7 @@ if (isset($_GET['product_id'])) {
     $product_id = $_GET['product_id'];
 
     // Consultamos el producto desde la base de datos
-    $stmt = $pdo->prepare("SELECT * FROM products WHERE id = :product_id LIMIT 1");
+    $stmt = $pdo->prepare("SELECT * FROM equipoPi_products WHERE id = :product_id LIMIT 1");
     $stmt->execute(['product_id' => $product_id]);
     $product = $stmt->fetch();
 
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $expiration_date = $_POST['expiration_date'];
 
     // Actualizamos el producto en la base de datos
-    $stmt = $pdo->prepare("UPDATE products SET name = :name, price = :price, stock = :stock, expiration_date = :expiration_date WHERE id = :product_id");
+    $stmt = $pdo->prepare("UPDATE equipoPi_products SET name = :name, price = :price, stock = :stock, expiration_date = :expiration_date WHERE id = :product_id");
     $stmt->execute([
         'name' => $name,
         'price' => $price,
