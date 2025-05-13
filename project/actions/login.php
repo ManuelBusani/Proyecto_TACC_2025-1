@@ -24,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     // Verificamos que exista y que la contraseña sea correcta
     if ($user && password_verify($password, $user['password'])) {
-
         // (esto es opcional) verificamos si la cuenta ha sido activada
         // if (!$user['is_verified']) {
         //     $_SESSION['error'] = "Tu cuenta no ha sido verificada aún.";
@@ -37,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         $_SESSION['is_admin'] = $user['is_admin'];
         $_SESSION['first_name'] = $user['first_name'];
 
-       // Verificamos si el usuario es administrador
+        // Verificamos si el usuario es administrador
         if ($_SESSION['is_admin'] == 1) {
             // Si es administrador, redirigimos al panel de administración
             header("Location: ../public/admin_panel.php");
@@ -46,6 +45,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         // Redireccionamos al panel
         header("Location: ../public/restricted_area.php");
         exit;
+
+    } else {
+        $_SESSION['error'] = "Correo o contraseña incorrectos.";
+        header("Location: ../public/index.php");
+        exit;
+    }
 } else {
     // Si alguien intenta acceder directamente por GET
     header("Location: ../public/index.php");
