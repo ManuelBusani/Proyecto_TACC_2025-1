@@ -182,7 +182,7 @@
                 try {
                     const data = JSON.parse(text);
                     if (data.success) {
-                        window.location.href = '../public/dashboard.php';
+                        window.location.href = 'index.php';
                     } else {
                         alert('Fallo en el login');
                     }
@@ -217,6 +217,7 @@
                 <li><a href="about.php">Sobre Nosotros</a></li>
                 <li><a href="contact.php">Contacto</a></li>
                 <li><a href="products.php">Productos</a></li>
+
                 <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
                         <li><a href="restricted_area.php">Zona Restringida</a></li>
                         <li><a href="admin_panel.php">Panel de Administración</a></li>

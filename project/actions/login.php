@@ -37,14 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         $_SESSION['is_admin'] = $user['is_admin'];
         $_SESSION['first_name'] = $user['first_name'];
 
+       // Verificamos si el usuario es administrador
+        if ($_SESSION['is_admin'] == 1) {
+            // Si es administrador, redirigimos al panel de administración
+            header("Location: ../public/admin_panel.php");
+            exit;
+        }
         // Redireccionamos al panel
-        header("Location: ../public/dashboard.php");
+        header("Location: ../public/restricted_area.php");
         exit;
-    } else {
-        $_SESSION['error'] = "Correo o contraseña incorrectos.";
-        header("Location: ../public/index.php");
-        exit;
-    }
 } else {
     // Si alguien intenta acceder directamente por GET
     header("Location: ../public/index.php");
