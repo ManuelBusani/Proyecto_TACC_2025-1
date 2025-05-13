@@ -21,7 +21,7 @@ $search_expiration_date = isset($_POST['search_expiration_date']) ? $_POST['sear
 $search_stock = isset($_POST['search_stock']) ? $_POST['search_stock'] : '';
 
 // Filtrar productos según los parámetros
-$query = "SELECT * FROM products WHERE 1=1";
+$query = "SELECT * FROM equipoPi_products WHERE 1=1";
 $params = [];
 
 if ($search_name) {
